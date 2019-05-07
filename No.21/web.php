@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
 Route::group(['prefix'=>'admin'],function(){
     route::get('news/create','Admin\NewsController@add');
     
@@ -25,6 +26,23 @@ Route::group(['prefix'=>'admin'],function(){
     
     //課題番号３(27)
     route::get('profile/edit','Admin\ProfileController@add')->middleware('auth');
+});
+*/
+
+/*
+   認証するときに共通の認証ならgroupのところに下記のような書き方もできます。
+   （動作確認していませんが）
+*/
+Route::group(['prefix'=>'admin','middleware' => 'auth'],function(){
+    route::get('news/create','Admin\NewsController@add');
+    
+    //課題番号２(22)
+    route::get('profile/create','Admin\ProfileController@add');
+    
+    route::get('news/create','Admin\NewsController@add');
+    
+    //課題番号３(27)
+    route::get('profile/edit','Admin\ProfileController@add');
 });
 
 Auth::routes();
